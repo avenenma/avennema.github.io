@@ -24,7 +24,7 @@
     align-items: flex-start;
     justify-content: center;
     gap: 20px;
-    max-width: 1600px;           /* optional: constrain max size */
+    max-width: 1600px;
     margin: 0 auto; 
     flex-wrap: wrap; /* Allows wrap on small screens */
   }
@@ -65,7 +65,7 @@
     background-color: white;
   }
   
-  /* Node text labels (optional if you want to add them later) */
+  /* Node text labels */
   .node text {
     pointer-events: none;
     font-size: 12px;
