@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>OD Flows Sankey</title>
+    
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/js/standalone/selectize.min.js"></script>
+    
+        <link href="https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/css/selectize.default.css" rel="stylesheet" />
+        <link rel="stylesheet" href="style.css">
+    </head>
+  
+
+    <body>
+        <h2>Commute Flows from Fort Bend → Houston Neighborhoods</h2>
+
+        <p id="graph-description">
+                    This chart shows top 20 commute flows from Fort Bend County into Houston neighborhoods. Use the filters to explore commutes to and from other neighborhoods.
+        </p>
+
+        <div id="main-layout">
+            <!-- Sidebar: Filters + Footer -->
+            <div id="left-panel">
+
+                <div id="controls" style="margin-bottom: 1em;">
+                    <!-- Year Slider -->
+                    <div id="yearSliderContainer">
+                        <label for="yearSlider"><strong>Year: </strong> <span id="yearLabel">2022</span></label>
+                        <input type="range" id="yearSlider" min="2015" max="2022" value="2022">
+                    </div>
+
+                    <!-- Search Origin / Dest -->
+                    <div id="extraFilters">
+                        <div style="margin-top: 8px;">
+                            <label for="originFilter"><strong>Show Commutes From:</strong></label>
+                            <select id="originFilter" multiple></select>
+
+                            <label for="destinationFilter"><strong>Show Commutes To:</strong></label>
+                            <select id="destinationFilter">
+                                <option value="All">All</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Age Group Filter -->
+                    <div id="ageFilter" class="filter-group">
+                        <span class="info-icon" data-tooltip="Based on the structure of the LODES data, users may only chose one dimesnion (Age or Income) to explore at a time.">&#9432;</span>
+                    </div>
+
+                    <!-- Income Group Filter -->
+                    <div id="incomeFilter" class="filter-group">
+                        <span class="info-icon" data-tooltip="Based on the structure of the LODES data, users may only chose one dimesnion (Age or Income) to explore at a time.">&#9432;</span>
+                    </div>
+
+                    <!-- ACS Attributes -->
+                    <div id="filter-label" style="margin-bottom: 6px;">
+                        <span id="info-icon">ⓘ</span>
+                        <strong>Filter by ACS Attribute:</strong>
+                        <div id="info-tooltip">
+                            ACS refers to the American Community Survey, a national survey by the U.S. Census Bureau. These filters highlight neighborhoods where the share of households is above average for:
+                            <ul style="margin-top: 4px; padding-left: 16px;">
+                                <li><strong>No Vehicle</strong> – households without access to a car</li>
+                                <li><strong>Transit</strong> – workers commuting by public transportation</li>
+                                <li><strong>Carpool</strong> – workers commuting in shared vehicles</li>
+                            </ul>
+                        </div>
+                        <div id="filters" style="margin-bottom: 1em;"></div>
+                    </div>
+                    
+                </div>
+
+                <!-- Download Button -->
+                <div id="downloadContainer">
+                    <button id="downloadCSV">Download Filtered Data</button>
+                </div>
+
+            </div>
+
+            <!-- Sankey Graph -->
+            <div id="right-panel">
+                <div id="sankey-container">
+                    <div id="svg-wrapper">
+                        <svg id="sankey"></svg>
+                        <div class="legend-box overlay"> <!-- NEW -->
+                            <span class="legend-swatch top10"></span> Top 10 Commutes
+                        </div>
+                    </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+
+        <script src="sankey.js"></script>
+    </body>
+
+    <!-- Method/ Sources -->
+    <footer id="data-source">
+        <p><em>Note:</em> Commute flows were derived by spatially joining census tract-level data to City of Houston Super Neighborhood boundaries. Counts reflect aggregated origin-destination estimates based on primary workplace and residence location.</p>
+     
+        <p><strong>Data Sources:</strong> <br>
+            <a href="https://ledextract.ces.census.gov/lodes/od" target="_blank">Census LED Origin-Destination Employment Statistics (LODES)</a><br>
+            <a href="https://cohgis-mycity.opendata.arcgis.com/datasets/deae15e7f3db4b198946c17f0d169c39_3/explore?location=29.822394%2C-95.415250%2C9.72" target="_blank">City of Houston Super Neighborhood boundaries</a><br>
+            <a href="https://mcdc.missouri.edu/applications/geocorr2022.html" target="_blank">MCDC Geocorr (Geographic Correspondence Engine) Tool</a><br>
+            <a href="https://data.census.gov/table/ACSDT5Y2023.B08141?q=Transportation&t=Transportation&g=050XX00US48157$1400000" target="_blank">ACS 5-Year Estimates, Means of Transportation to Work by Vehicles available, 2022 (Table B08141)</a></p>
+
+        <p>© 2025 Alessandra Vennema</p>
+    </footer> 
+
+</html>
