@@ -1,0 +1,274 @@
+/* ===== Base / Theme ===== */
+body {
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #F7F8FA;
+  color: #333;
+  margin: 0;
+  padding: 2rem;
+}
+
+h2 {
+  text-align: center;
+  margin: 0 0 .35rem 0;
+  font-size: 2rem;         /* ↑ title contrast */
+  color: #2c3e50;
+  line-height: 1.2;
+}
+
+#graph-description {
+  text-align: center;
+  margin: 0 0 1rem 0;      /* tighter spacing under title */
+  font-size: 0.975rem;
+  color: #4b5563;
+}
+
+/* ===== Layout ===== */
+#main-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 24px;
+  max-width: 1280px;       /* consistent readable width */
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+#left-panel {
+  flex: 1 1 320px;
+  max-width: 380px;
+  min-width: 260px;
+}
+
+#right-panel {
+  flex: 2 1 820px;
+  min-width: 520px;
+}
+
+/* Card containers for coherence */
+.panel {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  padding: 14px 16px;
+}
+
+#sankey-container {
+  width: 100%;
+  max-width: 100%;
+  height: clamp(420px, 75vh, 760px);
+  overflow: visible;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+#svg-wrapper {
+  height: 100%;
+  width: 100%;
+  padding: 8px; /* space for shadow */
+  background-color: transparent;
+}
+
+svg#sankey {
+  width: 100%;
+  height: 100%;
+  display: block;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  background-color: white;
+}
+
+/* ===== Typography inside chart ===== */
+.node text {
+  pointer-events: none;
+  font-size: 12px;
+  fill: #000;
+}
+
+/* ===== Links ===== */
+.link {
+  stroke-opacity: 0.65;
+  fill: none;
+  stroke: #c4c4c4;
+  transition: stroke-opacity 0.2s ease, stroke 0.2s ease, stroke-width 0.2s ease;
+}
+
+.link:hover {
+  stroke-opacity: 0.9;
+  stroke: #3a3a3a;
+}
+
+.link.highlight {
+  stroke: #1f78b4;
+}
+
+/* ===== Tooltip ===== */
+.tooltip {
+  position: absolute;
+  text-align: left;
+  padding: 8px 10px;
+  font-size: 13px;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  pointer-events: none;
+  color: #333;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+/* ===== Controls: alignment & buttons ===== */
+#controls {
+  margin: 0 auto 1rem auto;
+}
+
+#yearSliderContainer {
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+#yearSlider {
+  width: 100%;
+}
+
+.filter-group {
+  margin-bottom: 12px;
+}
+
+/* Make selects full-width and consistent */
+#extraFilters select {
+  margin-bottom: 8px;
+  width: 100%;
+}
+#extraFilters {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Selectize states */
+.selectize-input {
+  border-radius: 6px !important;
+  min-height: 38px !important;
+}
+.selectize-input.disabled {
+  background-color: #f5f5f5 !important;
+  color: #999 !important;
+  cursor: not-allowed !important;
+}
+
+/* ACS chips */
+button.filter-btn {
+  margin-right: 8px;
+  margin-bottom: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  background-color: #eef2f7;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px; /* pill */
+  cursor: pointer;
+}
+button.filter-btn:hover { background-color: #e4eaf2; }
+button.filter-btn.active { background-color: #265dab; color: white; border-color: #265dab; }
+
+/* Primary button */
+.btn-primary {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 9px 14px;
+  font-size: 13px;
+  background-color: #265dab;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.btn-primary:hover { background-color: #1b4585; }
+
+#downloadContainer {
+  text-align: center;
+  margin-top: .75em;
+}
+
+/* Info icon + tooltip */
+#info-icon {
+  display: inline-block;
+  margin-left: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+  padding: 2px 6px;
+  line-height: 1;
+  font-family: sans-serif;
+  transition: color 0.2s, border-color 0.2s;
+}
+#info-icon:hover { color: #1f78b4; }
+
+#info-tooltip {
+  display: none;
+  position: absolute;
+  background: white;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  font-size: 13px;
+  max-width: 525px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 10;
+  border-radius: 6px;
+  text-align: left;
+}
+
+/* Legend */
+.legend-box {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: #333;
+}
+.legend-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.legend-box.overlay {
+  position: absolute;
+  left: 16px;
+  bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.legend-swatch.top10 { background-color: #1f78b4; }
+
+/* Sources / footer in a details element */
+footer#data-source {
+  font-size: 12px;
+  color: #555;
+  text-align: left;
+  margin: 2rem auto 0 auto;
+  max-width: 1280px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1rem;
+}
+footer#data-source details {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  padding: 12px 14px;
+}
+footer#data-source summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+footer#data-source a { color: #005b96; text-decoration: none; }
+footer#data-source a:hover { text-decoration: underline; }
